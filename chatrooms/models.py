@@ -1,11 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-
-# Create your models here.
-
-
 class Chatroom(models.Model):
+    """
+    A model to create chatrooms
+    """
     chatroom_id = models.AutoField(
         db_column='chatroom_id',
         primary_key=True)
@@ -17,21 +16,21 @@ class Chatroom(models.Model):
         return self.name
 
 
-
 class Comment(models.Model):
+    """
+    A model to create comments
+    """
     comment_id = models.AutoField(
         db_column= 'comment_id',
         primary_key=True)
 
     chatroom = models.ForeignKey(
-        Chatroom, related_name='comments',
+        Chatroom, related_name='comment',
         on_delete=models.CASCADE)
 
     user = models.ForeignKey(
-        User, related_name='comments',
+        User,
         on_delete=models.CASCADE)
 
     content = models.TextField(blank=True, null=True)
     date = models.DateTimeField(auto_now_add=True)
-
-

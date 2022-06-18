@@ -12,6 +12,9 @@ Visit the live Website : **[Connect With :arrow_right:](https://connect-with.her
   * [Installations and dependencies](#Installations-and-dependencies)
 * [Live Deployment](#Live-Deployment)
   * [Create the Heroku app](#Create-the-Heroku-app)
+  * [Set up AWS s3 to host our static files and images](#Set-up-AWS-s3-to-host-our-static-files-and-images)
+  * [Connect Django to s3](#Connect-Django-to-s3)
+  * [Add Media folder to our bucket](#Add-Media-folder-to-our-bucket)
   * [Final Steps](#Final-Steps)
 
 This project is developed on [GitPod Workspaces IDE](https://www.gitpod.io/) (Integrated Development Environment) committed and pushed to [GitHub](https://github.com), to [The hackathon group repository](https://github.com/Tom-Nagy/together-hackathon-june-22) using GitPod Command Line Interface (CLI) with [Git version control](https://git-scm.com/).
@@ -78,6 +81,8 @@ To Fork a repository take the following steps :
 2. Identify the ```fork``` button on the top right of the page and click on it.
 3. Now you should find a copy of the repository in ```Your repositories```.
 
+[**:back:** *Table of Content*](#Table-of-Content)
+
 ### Installations and dependencies
 
 * A requirements.txt file was created in the main project folder. This file tells what applications and dependencies are required to run the application. When you have created/cloned/forked the project, it is import to run this command in the CLI:
@@ -97,9 +102,15 @@ To Fork a repository take the following steps :
 
 The next step is the live deployment of the website :arrow_double_down:
 
+[**:back:** *Table of Content*](#Table-of-Content)
+
 ## Live Deployment
 
-* The website is hosted on [Heroku](https://heroku.com) where all the code except the static files will live.
+* The website is hosted on [Heroku](https://heroku.com) where all the code except the static files that will be hosted on AWS.
+
+* This project was deployed in two steps:
+  * First an app to host the website was created on [Heroku](https://heroku.com) where all the code except the static files will live.
+  * Then Amazon Web Services (or AWS), and more specifically s3 (simple storage service) will be set up in order to host all static files (css, js, images).
 
 ### Create the Heroku app
 
@@ -216,6 +227,237 @@ The next step is the live deployment of the website :arrow_double_down:
     * Enable Automatic deploys in the next section.
     * Now every time you add, commit and push to GitHub, it will automatically deploy to Heroku.
 
+[**:back:** *Table of Content*](#Table-of-Content)
+
+### Set up AWS s3 to host our static files and images
+
+Now we will set up Amazon Web Services ([AWS](https://aws.amazon.com/)) s3 (simple storage service) which is a cloud-based storage service that will allow us to store static files and images for the project.
+
+1. Navigate to [AWS Amazon](https://aws.amazon.com/), create an account and sign in.
+
+2. Navigate or look for "s3 Scalable Storage in the Cloud" and create a new bucket used to store our files.
+    * To be consistent I recommend naming the bucket the same as your project name on Heroku.
+    * Choose the closest region to you.
+    * Uncheck "Block all public access" and acknowledge that the bucket will be public.
+      * ![AWS public access](documentation/deployment/aws-public-access.png)
+    * Click create bucket and your bucket will be created.
+
+3. Navigate to your bucket and go to the **Properties** tab.
+    * Scroll down to "Static website hosting" and click edit.
+    * Select enable static website hosting. It will give us a new endpoint we can use to access it from the internet.
+    * Enter some default values for the index document (index.html) and for the error document(error.html).
+    * Click save changes.
+
+4. Navigate to the **Permissions** tab.
+
+   1. Scroll down to **Cross-origin resource sharing (CORS)** and click edit.
+    * Paste the following code to set up the required access between our Heroku app and this s3 bucket and click save changes.
+
+        ```json
+        [
+            {
+            "AllowedHeaders": [
+                "Authorization"
+            ],
+            "AllowedMethods": [
+                "GET"
+            ],
+            "AllowedOrigins": [
+                "*"
+            ],
+            "ExposeHeaders": []
+            }
+        ]
+        ```
+
+   2. Go to the **Bucket Policy** and click edit.
+    * Click on "Policy Generator" so we can create a security policy for this bucket.
+      * Choose "S3 Bucket Policy" from the policy type list.
+      * Allow all principal by entering a star (``*``) in the principal input.
+      * Choose "GetObject" from the select Action list.
+      * Copy the ARN (Amazon Resource Name) from the "*aws Edit bucket policy*" tab and paste it into the ARN input box. It consists of ``arn:aws:s3:::<your aws bucket name>``
+      * Click "Add Statement".
+      * The statements should be similar to the following:
+        * ![AWS policy](documentation/deployment/aws-policy.png)
+      * Click "Generate Policy".
+      * Copy the code snippet provided and paste it in the bucket policy editor replacing the default one.
+      * Before to click save we need to modify the resource key because we want to allow access to all resources in this bucket. So we need to add a slash star (``/*``) at the end of the resource key as shown below:
+        * ![Resource access](documentation/deployment/resource-access.png)
+      * Click save changes.
+
+    3. Got to **Object Ownership** and click edit.
+      * Choose ACLs enabled in order to change ACL list.
+      * Acknowledge and click save changes
+
+    4. Got to **Access control list (ACL)** and click edit.
+      * At "Everyone (public access)" select List in the Objects column.
+      * Tick I understand and save changes.
+
+5. Now the s3 bucket is ready to go, but to access it, we need to create a user. To do This we will use a service called IAM (Identity and Access Management).
+    1. Navigate to services or to the search bar, look for and select **IAM**
+      * ![AWS IAM](documentation/deployment/aws-iam.png)
+      * first we will create a group for our user to live in.
+      * Then we will create an access policy giving the group access to the s3 bucket we created.
+      * Finally, we will assign the user to the group, so it can use the policy to access all our files.
+
+    2. Click on "User groups" below Access Management.
+      * Click on create a new group and give it a name that is consistent with your project (e.i. ``manage-<your project name>``).
+      * Scroll down and click create group.
+
+    3. Click on the "Policies" below Access Management.
+      * Click on create policy.
+      * Select the JSON tab and click on the import managed policy link. This way we will import one that AWS has pre-built for full access to s3.
+      * Search for s3, select "AmazonS3FullAccess" and click import.
+      * ![AWS IAM policy](documentation/deployment/aws-iam-policy.png)
+      * We don't actually want to allow full access to everything; we only want to allow full access to our new bucket and everything within it.
+      * So get the bucket ARN from your s3 bucket and paste it in resource replacing its ``*`` value.
+        * Navigate to services and open s3 from the "recently visited" in a different tab to get your bucket ARN by clicking on your project bucket under the properties tab.
+        * We are replacing the current value by a list, so it is important to use the correct syntax as shown bellow.  
+
+        * From this:
+
+          ```json
+          "Resource": "*",
+          ```
+
+        * To this:
+
+          ```json
+          "Resource": [
+            "arn:aws:s3:::<your s3 bucket name>",
+            "arn:aws:s3:::<your s3 bucket name>/*"
+          ]
+          ```
+
+        * Click on "next: tags" and leave it as it is.
+        * Click on "next: review" and give the policy a name and a description.
+        * Click on "create policy".
+        * We are now redirected to the policies page, and we can see that the policy was created.
+      * Now we will attach the policy to the group we just created.
+        * Navigate to user groups and select the group for your project.
+        * Click on the Permissions tab.
+        * Click on Add Permissions and select Attach Policies.
+        * Search for the policy that we just created (It should be on the top of the list, otherwise use the search bar) and select it.
+        * Scroll down and click Add Permission.
+
+    4. Now we will create a user to put in the group.
+      * Click on Users below Access Management.
+      * Click on Add users.
+      * Give it a name (e.i. ``<your project name>-staticfiles-user``)
+      * Select "Access key - Programmatic access"
+      * Click on "Next".
+      * Select the group we just created that has the policy attached and click next until you create the user as we have nothing else to add.
+
+:warning: Now download the CSV file which will contain the users access key and secret access key which we'll use to authenticate them from our Django app.  
+**:warning:It is very important you download and save this CSV because once we have gone through this process we CANNOT DOWNLOAD THEM AGAIN. :no_entry:**
+
+[**:back:** *Table of Content*](#Table-of-Content)
+
+### Connect Django to s3
+
+1. Back to your IDE, we will need to install boto3 and django-storages.
+    * Type in the CLI: ``pip3 install boto3``, and ``pip3 install django-storages``.
+    * Freeze the packages with ``pip3 freeze > requirements.txt``.
+    * We need to add storages to our installed apps.
+    * In settings.py and in ``INSTALLED_APPS``, add storages to the list : ``'storages',``.
+
+2. We need to add some settings in settings.py to tell Django to connect to s3 and to which bucket it should be communicating with.
+
+In the "static files" section of settings.py we need to add the following code snippet.
+
+:pushpin: Note that the values will depend on your bucket. You can find the information for the region name in the properties tab of your bucket as well as the name of you bucket which is the end part of the ARN (e.i ``arn:aws:s3:::<your bucket name>``). The access key and secret access key are the one from the .csv file we downloaded earlier.  
+As well, we will add cache control in order to tell the browser that it's okay to cache static files for a long time. This will improve performance and user experience.
+
+We use an if statement because we only want to use those on heroku, where we will add the ``USE_AWS`` var next.
+
+```python
+# Amazon S3 Bucket
+if 'USE_AWS' in os.environ:
+
+  # Cache control
+  AWS_S3_OBJECT_PARAMETERS = {
+    'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
+    'CacheControl': 'max-age=94608000',
+  }
+
+  # Bucket Config
+  AWS_STORAGE_BUCKET_NAME = 'your bucket name'
+  AWS_S3_REGION_NAME = 'your region'
+  AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+  AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY') 
+  AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com' # tell Django where our static files will come from in production.
+```
+
+3. Add the AWS variables to the config var in heroku.
+
+Navigate to your Heroku app and to the settings. In Config vars add the following key value pair:
+
+| KEY                   | VALUE      |
+| --------------------- |----------- |
+| AWS_ACCESS_KEY_ID     | YOUR VALUE |
+| AWS_SECRET_ACCESS_KEY | YOUR VALUE |
+| USE_AWS               | True       |
+
+Now you can remove/delete the ``DISABLE_COLLECTSTATIC`` variable from the list of variables.
+
+4. Now we need to tell django that in production we want to use s3 to store our static files whenever someone runs collectstatic. And that we want any uploaded product images to go there too.
+
+    * We need to create a file in the root directory called ``custom_storages.py`` and type in the following code snippet.
+
+    ```python
+    """
+    Configure Amazon s3 for storage in production
+    """
+
+    from django.conf import settings
+    from storages.backends.s3boto3 import S3Boto3Storage
+
+
+    class StaticStorage(S3Boto3Storage):
+        """Set static file location"""
+        location = settings.STATICFILES_LOCATION
+
+
+    class MediaStorage(S3Boto3Storage):
+        """Set media files location"""
+        location = settings.MEDIAFILES_LOCATION
+    ```
+
+    * In settings.py we need to tell Django that for static file storage we want to use our storage class we just created. And give it the location to save the static files (a folder called static).
+    * We need to do the same for media files by using the default file storage and media files location settings.
+    * As well, we need to override and explicitly set the URLs for static and media files using our custom domain and the new locations.
+    * So in settings.py below our bucket settings, add in this code snippet inside the if statement:
+
+    ```python
+    # Static and media files
+    STATICFILES_STORAGE = 'custom_storages.StaticStorage'
+    STATICFILES_LOCATION = 'static'
+    DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
+    MEDIAFILES_LOCATION = 'media'
+
+    # Override static and media URLs in production
+    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}/'
+    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/'
+    ```
+
+5. You can now add, commit and push your changes to GitHub. Your static files are now deployed automatically.
+
+[**:back:** *Table of Content*](#Table-of-Content)
+
+### Add Media folder to our bucket
+
+The media folder has not been created at the moment because it is not used. The steps to create it are simple and explained for future use if needed.
+
+* Navigate to your s3 bucket and to the Objects tab.
+* Click on the Create Folder.
+* Name your folder "media" and click Create folder.
+* Navigate to the media folder you just created and inside it, click Upload.
+* Click Add Files and select all the product images. If you need to download them all, you can do so from your own GitHub repo.
+* In Permissions > Access control list (ACL) > Predefined ACLs select "Grant public-read access" and tick you understand the risks.
+* Click on Upload.
+
+[**:back:** *Table of Content*](#Table-of-Content)
+
 ### Final Steps
 
 1. Confirm email address for our Superuser in Postgres database.
@@ -229,3 +471,5 @@ The next step is the live deployment of the website :arrow_double_down:
 * Click on your email address and mark it as **verified** and **primary**.
 * Click save.
 * You have now successfully register and can log out and login into the website.
+
+[**:back:** *Table of Content*](#Table-of-Content)
