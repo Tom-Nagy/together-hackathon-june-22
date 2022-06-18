@@ -1,3 +1,4 @@
+from codecs import charmap_build
 from django.shortcuts import render
 from .models import Chatroom, Comment
 
@@ -6,16 +7,14 @@ from .models import Chatroom, Comment
 def chatrooms(request):
     """
     A view to display all the chatrooms
-    # """
+    """
     chatrooms = Chatroom.objects.all()
-
 
 
     template = 'chatrooms/chatrooms.html'
     context = {
         'chatrooms': chatrooms,
     }
-
 
 
 

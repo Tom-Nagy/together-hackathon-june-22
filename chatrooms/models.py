@@ -24,14 +24,12 @@ class Comment(models.Model):
         primary_key=True)
 
     chatroom = models.ForeignKey(
-        Chatroom, related_name='comments',
+        Chatroom, related_name='comment',
         on_delete=models.CASCADE)
 
     user = models.ForeignKey(
-        User, related_name='comments',
+        User,
         on_delete=models.CASCADE)
 
     content = models.TextField(blank=True, null=True)
     date = models.DateTimeField(auto_now_add=True)
-
-
