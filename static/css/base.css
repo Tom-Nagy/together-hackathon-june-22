@@ -9,18 +9,46 @@ body {
     position: relative;
     font-family: 'Lato', sans-serif;
     color: #0d0d0d;
-    background-color: #f2f2f2;
+    background-color: #eeedeb;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
     font-family: 'Poppins', sans-serif;
-    color: #634628;
+    color: #6a9eb0;
 }
 
 p {
     max-width: 60ch;
 }
 
+/* --------------------------Nav bar */
+.site-nav {
+    padding-top: 3vw;
+    padding-bottom: 3vw;
+}
+
+.logo {
+    font-family: "Poppins";
+    font-weight: 400;
+    font-size: 25px;
+}
+
+.site-menu li {
+    padding-right: 15px;
+}
+
+.site-menu li a {
+    letter-spacing: 1xpx;
+    font-family: "Poppins";
+    font-weight: 400;
+}
+
+
+
+
+/* --------------------------Buttons */
 .btn,
 button,
 a {
@@ -35,12 +63,6 @@ a {
     cursor: pointer;
 
     border: none;
-}
-
-.btn,
-button {
-    color: #0d0d0d;
-    background-color: #b1e9fc;
 }
 
 a {
@@ -64,7 +86,22 @@ a:active,
 a:focus {
     text-decoration: underline;
     color: #0d0d0d;
-    text-shadow: .5px 1px 2px #b1e9fc;
+    text-shadow: .5px 0.5px 1px #b1e9fc;
+}
+
+.btn--cta {
+    font-weight: bold;
+    width: 160px;
+    border-radius: 0;
+    padding: 15px 5px;
+    width: 200px;
+
+}
+
+.btn--black {
+    color: #eeedeb;
+    background-color: #000000;
+    border-color: #000000;
 }
 
 /* colors */
@@ -118,4 +155,25 @@ a:focus {
 
 .toast-capper {
     height: 2px;
+}
+
+/* --------------------------------------- Hero */
+
+.hero {
+    padding-top: 3rem;
+    padding-bottom: 10rem;
+}
+
+.img-fluid {
+    margin-top: 50px;
+}
+
+.sdac {
+    letter-spacing: 2px;
+
+}
+
+.heading {
+    font-size: 50px;
+    font-weight: 700 !important;
 }
