@@ -123,8 +123,8 @@ There are no audio, video or images used at the moment.
 ![Site map](documentation/wireframes/site-map.png)
 
 ![Home page](documentation/wireframes/home.png)
-![About-us page](documentation/wireframes/About-us.png)
-![Chat-room page](documentation/wireframes/Chat-room.png)
+![About-us page](documentation/wireframes/about-us.png)
+![Chat-room page](documentation/wireframes/chat-room.png)
 ![mobile page](documentation/wireframes/mobile.png)
 
 
