@@ -18,7 +18,7 @@ class AddCommentForm(forms.ModelForm):
 
         super().__init__(*args, **kwargs)
         placeholders = {
-            'content': 'Ask a question',
+            'content': 'Ask a Question',
         }
 
         self.fields['content'].widget.attrs['autofocus'] = True

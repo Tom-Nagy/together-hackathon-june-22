@@ -25,6 +25,7 @@
             <!-- styles and favicon -->
             <link rel="stylesheet" href="{% static 'css/base.css' %}">
             <link rel="shortcut icon" type="image/jpg" href="{% static 'images/favicon.ico' %}" />
+            <script src="https://kit.fontawesome.com/09f433170b.js" crossorigin="anonymous"></script>
         {% endblock %}
 
         {% block extra_css %}
@@ -133,11 +134,13 @@
                 // Display toasts messages
                 $('.toast').toast('show');
             </script>
+
             <script>
+                // Prevents resubmission of forms on page refresh
                 if ( window.history.replaceState ) {
                   window.history.replaceState( null, null, window.location.href );
                 }
-                </script>
+            </script>
         {% endblock %}
     </body>
 </html>

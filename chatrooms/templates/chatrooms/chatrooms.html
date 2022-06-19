@@ -4,8 +4,10 @@
 {% block content %}
 <div class="container-fluid my-4">
     <div class="row my-5">
-        <div class="col-2 offset-9">
-            <button class="btn btn-success" type="button" data-toggle="modal" data-target="#myModal">Open a new chatroom
+        <div class="col-12">
+            <h2 class="text-center">Chatrooms</h2>
+            <button class="btn btn-success" type="button" data-toggle="modal" data-target="#myModal">
+                Open a new chatroom <i class="fa-solid fa-plus pl-1"></i>
             </button>
         </div>
     </div>
@@ -41,7 +43,7 @@
                         <a href="{% url 'chatroom_detail' chatroom.chatroom_id %}"></a>
                         <div class="card-body">
                             <h4>{{ chatroom.name }}</h4>
-                            <p class="card-text">{{ chatroom.subject }}</p>
+                            <p class="card-text">{{ chatroom.subject|slice:"40" }}...</p>
                             <p class="card-text"><small class="text-muted">Created : {{ chatroom.date_created }}</small></p>
                         </div>
                     </div>
@@ -63,4 +65,12 @@
             return false;
         });
     </script>
+
+    <script>
+        // Prevents resubmission of forms on page refresh
+        if ( window.history.replaceState ) {
+          window.history.replaceState( null, null, window.location.href );
+        }
+    </script>
+
 {% endblock %}
