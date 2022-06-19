@@ -2,6 +2,9 @@
 
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls.static import static
+from django.conf import settings
+
 
 # for media option
 # from django.conf import settings
@@ -12,4 +15,4 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('', include('home.urls')),
     path('chatrooms/', include('chatrooms.urls')),
-]  # + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]   + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
