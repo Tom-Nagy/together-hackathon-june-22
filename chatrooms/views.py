@@ -1,9 +1,10 @@
 from django.shortcuts import (
     get_object_or_404, redirect, render, reverse)
-from .models import Chatroom
-from .forms import AddChatroomForm
+from .models import Chatroom, Comment
+from .forms import AddChatroomForm, AddCommentForm
+from django.contrib.auth.decorators import login_required
 
-# Create your views here.
+
 
 def chatrooms(request):
     """
@@ -40,9 +41,22 @@ def chatroom_detail(request, chatroom_id):
     """
 
     chatroom = get_object_or_404(Chatroom, pk=chatroom_id)
+
+    if request.method == "POST" and request.user.is_authenticated:
+        content = request.POST.get('content')
+
+        Comment.objects.create(
+            chatroom = chatroom,
+            user = request.user,
+            content = content,
+            )
+        return redirect('chatroom_detail', chatroom_id)
+
+    add_comment_form = AddCommentForm()
     template = 'chatrooms/chatroom_detail.html'
     context = {
         'chatroom' : chatroom,
+        'add_comment_form' :add_comment_form,
     }
 
     return render(request, template, context)
