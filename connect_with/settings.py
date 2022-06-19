@@ -11,15 +11,14 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 
-import dj_database_url 
+import dj_database_url
 
 import os
 if os.path.exists('env.py'):
     import env
 
-if os.path.exists('dotenv'):
-    from dotenv import load_dotenv
-    load_dotenv()
+from dotenv import load_dotenv
+load_dotenv()
 
 from pathlib import Path
 
