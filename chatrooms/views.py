@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import (
+    get_object_or_404, redirect, render, reverse)
 from .models import Chatroom
 from .forms import AddChatroomForm
 
@@ -27,6 +28,21 @@ def chatrooms(request):
     context = {
         'chatrooms': chatrooms,
         'add_chatroom_form' :add_chatroom_form,
+    }
+
+    return render(request, template, context)
+
+
+def chatroom_detail(request, chatroom_id):
+    """
+    A view to present the chatroms' content and hold the
+    comment forms
+    """
+
+    chatroom = get_object_or_404(Chatroom, pk=chatroom_id)
+    template = 'chatrooms/chatroom_detail.html'
+    context = {
+        'chatroom' : chatroom,
     }
 
     return render(request, template, context)

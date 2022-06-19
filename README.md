@@ -172,6 +172,7 @@ As a framework Django works with SQL databases. The built-in sqlite3 has been us
 | chatroom_id | chatroom_id | primary_key=True | AutoField |
 | name | name | max_length=20, blank=False | CharField |
 | subject | subject | max_length=145, blank=False, null=False | CharField |
+| date_created | date_created | auto_now_add=True | AutoField |
 
 - Comment Model
   - Within the chatrooms app, the Comment model holds the data needed for different comments in each chatroom.

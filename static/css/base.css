@@ -19,9 +19,9 @@ h3 {
     color: #6a9eb0;
 }
 
-p {
+/* p {
     max-width: 60ch;
-}
+} */
 
 /* --------------------------Nav bar */
 .site-nav {
@@ -229,7 +229,7 @@ a:focus {
 }
 
 .allauth-form-inner-content button:hover,
-.allauth-form-inner-content input[type='submit']:hover {	
+.allauth-form-inner-content input[type='submit']:hover {
 	text-decoration: none;
     color: #b1e9fc;
     background-color: #0d0d0d;

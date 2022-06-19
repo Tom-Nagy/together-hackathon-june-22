@@ -32,20 +32,13 @@
         </div>
     </div>
 
-
-
-
-
-
-
-
-
     <div class="row">
         <div class="col">
             <div class="card-group row">
                 {% for chatroom in chatrooms %}
-                <div class="col-12 col-md-6 col-lg-4">
+                <div class="col-12 col-md-6 col-lg-4 my-3 chatroom-link">
                     <div class="card">
+                        <a href="{% url 'chatroom_detail' chatroom.chatroom_id %}"></a>
                         <div class="card-body">
                             <h4>{{ chatroom.name }}</h4>
                             <p class="card-text">{{ chatroom.subject }}</p>
@@ -59,4 +52,15 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+
+{% block postloadjs %}
+    <script>
+        "Makes the entire chatroom cards clickable"
+        $(".chatroom-link").click(function () {
+            window.location = $(this).find("a").attr("href");
+            return false;
+        });
+    </script>
 {% endblock %}
