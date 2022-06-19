@@ -10,7 +10,7 @@ class Chatroom(models.Model):
         primary_key=True)
 
     name = models.CharField(max_length=20, blank=False)
-    subject = models.CharField(max_length=145, blank=False)
+    subject = models.CharField(max_length=445, blank=False)
     date_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
