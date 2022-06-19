@@ -32,12 +32,3 @@
 </div>
 {% endblock %}
 
-
-{% block postloadjs %}
-    <script>
-        // Prevents resubmission of forms on page refresh
-        if ( window.history.replaceState ) {
-          window.history.replaceState( null, null, window.location.href );
-        }
-    </script>
-{% endblock %}
