@@ -77,9 +77,10 @@ button:focus {
 a:hover,
 a:active,
 a:focus {
-    text-decoration: underline;
+    text-decoration: none;
     color: #0d0d0d;
     text-shadow: .5px 0.5px 2px #b1e9fc;
+    cursor: pointer;
 }
 
 .btn--cta {
@@ -276,7 +277,9 @@ a:focus {
     overflow:hidden;
     display:inline-block;
     width:400px;
-    height:235px"
+    height:235px;
+    min-width: 400px;
+
 }
 
 .event-img-position {
@@ -309,11 +312,12 @@ a:focus {
     font-weight: 600;
 }
 
-.event-title {
+event-title {
     margin: 0px 0px 0.5em;
     font-size: 1.25rem;
     line-height: 1.25;
 }
+
 
 .event-address {
     color: #325663;
@@ -372,7 +376,7 @@ a:focus {
     -ms-transition-property: transform;
     -moz-transition-property: transform;
     -webkit-transition-property: transform;
-    
+
     transition-duration: 500ms;
     -o-transition-duration: 500ms;
     -ms-transition-duration: 500ms;
@@ -382,4 +386,3 @@ a:focus {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
-
