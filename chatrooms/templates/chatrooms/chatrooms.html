@@ -22,16 +22,16 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <form action="{% url 'chatrooms' %}" method="POST" id="chatroom-form">
-                        {% csrf_token %}
-                        {{ add_chatroom_form | crispy }}
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Discard</button>
-                </div>
+                <form action="{% url 'chatrooms' %}" method="POST" id="chatroom-form">
+                    <div class="modal-body">
+                            {% csrf_token %}
+                            {{ add_chatroom_form | crispy }}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Discard</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -54,7 +54,6 @@
                 </div>
                 {% endfor %}
             </div>
-
         </div>
     </div>
 </div>

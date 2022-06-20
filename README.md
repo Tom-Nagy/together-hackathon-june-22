@@ -20,15 +20,10 @@ Visit the live Website : **[Connect With :arrow_right:](https://connect-with.her
       - [Styling/Feeling](#stylingfeeling)
       - [Audio/Video/Images](#audiovideoimages)
     - [Wireframes](#wireframes)
-    - [Different design](#different-design)
   - [Features](#features)
-    - [feature name .....](#feature-name-)
-    - [Defensive design](#defensive-design)
   - [Future features to implement](#future-features-to-implement)
   - [Database](#database)
     - [Database design](#database-design)
-    - [Database Structure](#database-structure)
-      - [Models relationship](#models-relationship)
   - [Technologies Used](#technologies-used)
     - [Programming Languages](#programming-languages)
     - [Frameworks, Libraries and Programs](#frameworks-libraries-and-programs)
@@ -45,6 +40,8 @@ Visit the live Website : **[Connect With :arrow_right:](https://connect-with.her
     - [Add Media folder to our bucket](DEPLOYMENT.md#Add-Media-folder-to-our-bucket)
     - [Final Steps](DEPLOYMENT.md#Final-Steps)
       - [Email set up with Django](DEPLOYMENT.md#Email-set-up-with-Django)
+
+  - [Testing](#Testing) [:fast_forward: TESTING.md](TESTING.md)
 
   - [Credit](#credit)
     - [Content](#content)
@@ -127,7 +124,7 @@ It makes users comfortable.
 
 #### Audio/Video/Images
 
-There are no audio, video or images used at the moment.
+There is a hero image to give some weight to the landing page and pictures in the coming event from the events.
 
 [**:back:** *Table of Content*](#Table-of-Content)
 
@@ -142,28 +139,54 @@ There are no audio, video or images used at the moment.
 
 [**:back:** *Table of Content*](#Table-of-Content)
 
-### Different design
-
-[**:back:** *Table of Content*](#Table-of-Content)
-
 ## Features
 
-### feature name .....
+- For consistency across the website the navigation is present on all pages.
+  - ![Navigation bar](documentation/features/navbar.png)
 
-### Defensive design
+- It is important to note that other functionalities are available through the url/admin accessing Django admin interface.
 
-* Extra step to confirm the deletion of a product
+### Chatrooms
+
+- The chatroom present all the different chatrooms or discussion subject present on the website.  
+
+- Users you can browse to see the different rooms define by a Name and a subject.  
+  - ![Chatrooms](documentation/features/chatrooms.png)
+
+- There is the possibility to create a chatroom when registered logged in.
+  - ![Create chatroom](documentation/features/create-chatroom.png)
+
+### Discuss
+
+- When selecting a chatroom the user is directed to the discussion page.
+
+- Users can browse the discussion, the latest comment being at the bottom of the page.
+
+- Users can participate in the discussion when registered logged in.
+  - ![Discussion](documentation/features/discussion.png)
 
 [**:back:** *Table of Content*](#Table-of-Content)
 
 ## Future features to implement
 
+- Contact us form. Add a form for user to be able to reach out to the website owner.
+- Swear words checker. For a friendlier and safer space we will implement in the future a word checker to prevent abuse posting.
+- The possibility to close or silence a discussion automatically that was not active for a period of time. Those chatrooms would be accessible with a past chats button.
+- Search/sort functionality to be able to sort the chats and/or to look for specific subjects.
+- Favorite. Create a favorite page where registered user can see their favorite discussion.
+  - Having an option to save some comment (not only the whole chat).
+
 [**:back:** *Table of Content*](#Table-of-Content)
 
 ## Database
-As a framework Django works with SQL databases. The built-in sqlite3 has been used to create the database for this project.
+
+As a framework Django works with relational databases.
+
+- During development, sqlite3 was used. It is the database provided by Django and only use for development.
+- For Production, Postgres is used. It is the database provided by Heroku when deploying the website live.
 
 ### Database design
+
 - Chatroom Model
   - Within the chatrooms app, the Chatroom model holds the data needed for different chatrooms.
 
@@ -251,6 +274,12 @@ It is a team project that was build by creating pull request in order to merge t
   * [Add Media folder to our bucket](DEPLOYMENT.md#Add-Media-folder-to-our-bucket)
   * [Final Steps](DEPLOYMENT.md#Final-Steps)
     * [Email set up with Django](DEPLOYMENT.md#Email-set-up-with-Django)
+
+[**:back:** *Table of Content*](#Table-of-Content)
+
+## Testing
+
+Testing information are published in a separate file for better readability. Please see [TESTING.md](TESTING.md).
 
 [**:back:** *Table of Content*](#Table-of-Content)
 
