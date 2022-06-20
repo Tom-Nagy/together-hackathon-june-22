@@ -6,9 +6,11 @@
     <div class="row my-5">
         <div class="col-12">
             <h2 class="text-center">Chatrooms</h2>
-            <button class="btn btn-success" type="button" data-toggle="modal" data-target="#myModal">
-                Open a new chatroom <i class="fa-solid fa-plus pl-1"></i>
-            </button>
+            {% if request.user.is_authenticated %}
+                <button class="btn btn-success ml-1 ml-md-3 ml-lg-5" type="button" data-toggle="modal" data-target="#myModal">
+                    Open a new chatroom <i class="fa-solid fa-plus pl-1"></i>
+                </button>
+            {% endif %}
         </div>
     </div>
     <div class="modal" tabindex="-1" role="dialog" id="myModal">

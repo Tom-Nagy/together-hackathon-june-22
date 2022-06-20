@@ -43,6 +43,7 @@ def chatroom_detail(request, chatroom_id):
     """
 
     chatroom = get_object_or_404(Chatroom, pk=chatroom_id)
+    comments = Comment.objects.filter(chatroom=chatroom).order_by('date').reverse()
 
     if request.method == "POST":
         if request.user.is_authenticated:
@@ -63,6 +64,7 @@ def chatroom_detail(request, chatroom_id):
     context = {
         'chatroom': chatroom,
         'add_comment_form': add_comment_form,
+        'comments' : comments,
         }
 
     return render(request, template, context)
