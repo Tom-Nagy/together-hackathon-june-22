@@ -184,6 +184,16 @@ a:focus {
 
 /* --------------------------------- allauth */
 
+#carouselEvents img.card-img-top{
+    max-height:18rem !important;
+    min-height:18rem !important;
+    height:18rem;
+}
+
+
+
+/* --------------------------------- allauth */
+
 .allauth-form-inner-content {
     margin-top: 1.5rem;
 }

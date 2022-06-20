@@ -5,38 +5,171 @@
 
 {% block content %}
 
-  <!-- Hero -->
-  <div class="hero overlay">
+<!-- Hero -->
+<div class="hero overlay">
     <div class="container">
-      <div class="row align-content-center justify-content-between">
-        <div class="col-lg-5 box">
-          <a href="#">
-            <span class="icon-play"></span>
-            <img
-              class="img-fluid img-shadow"
-              src="{% static 'images/love-unites.jpeg' %}"
-              alt="Image of a fist with a rainbow on it representing unity."
-            />
-          </a>
+        <div class="row align-content-center justify-content-between">
+            <div class="col-lg-5 box">
+                <a href="#">
+                    <span class="icon-play"></span>
+                    <img class="img-fluid img-shadow" src="{% static 'images/love-unites.jpeg' %}"
+                        alt="Image of a fist with a rainbow on it representing unity." />
+                </a>
+            </div>
+            <div class="col-lg-6 mb-4 mb-lg-0 text-center text-lg-left">
+                <p class="text-50 sdac text-uppercase text-center text-lg-left mt-5">
+                    share. discuss. ask. connect
+                </p>
+                <h1 class="heading font-weight-bold text-center text-lg-left">
+                    We are a Community
+                </h1>
+                <p class="text-50 mb-5 text-center text-lg-left">
+                    The Human Experience begins when you allow it. Share and Explore the world. Our Community awaits.
+                </p>
+                <p class="text-center text-lg-left">
+                    <a class="btn btn--cta btn--black" href="{% url 'account_signup' %}"
+                        aria-label="Link to create an account page.">Join the Community</a>
+                </p>
+            </div>
         </div>
-        <div class="col-lg-6 mb-4 mb-lg-0 text-center text-lg-left">
-          <p class="text-50 sdac text-uppercase text-center text-lg-left mt-5">
-            share.  discuss.  ask.  connect
-          </p>
-          <h1 class="heading font-weight-bold text-center text-lg-left">
-            We are a Community  
-          </h1>
-          <p class="text-50 mb-5 text-center text-lg-left">
-            The Human Experience begins when you allow it. Share and Explore the world. Our Community awaits. 
-          </p>
-          <p class="text-center text-lg-left">
-            <a class="btn btn--cta btn--black" href="{% url 'account_signup' %}" aria-label="Link to create an account page.">Join the Community</a>
-          </p>
+
+
+        <div class="row my-5">
+            <div class="col">
+                <div id="carouselEvents" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#carouselEvents" data-slide-to="0" class="active"></li>
+                        <li data-target="#carouselEvents" data-slide-to="1"></li>
+                        <li data-target="#carouselEvents" data-slide-to="2"></li>
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="card-group">
+                                <div class="card">
+                                    <img class="card-img-top" src="{% static '/images/pride-amsterdam.jpeg' %}"
+                                        alt="Card image cap">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-info">Pride Amsterdam 2022</h5>
+                                        <p class="card-text">One of Europe’s most popular gay festivals. Pride Amsterdam
+                                            2022 is taking place from 20 July to 7 August – unlike most cities, this one
+                                            takes place on a canal!
+                                        </p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <small class="text-muted">start date: 30-Jul-2022 | finish date:
+                                            07-Aug-2022</small>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <img class="card-img-top" src="{% static '/images/berlin-pride.jpeg' %}"
+                                        alt="Card image cap">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-info">Lesbian and Gay City Festival 2022</h5>
+                                        <p class="card-text">Returning for the 28th time in 2022, The Lesbian and Gay
+                                            City Festival in Berlin is Europe’s largest street party of its kind. Taking
+                                            place around Nollendorfplatz, the traditional gay stomping ground in
+                                            Berlin-Schöneberg, this celebration draws in more than 400,000 visitors each
+                                            year. This makes the area one of Berlin’s most popular neighborhoods for the
+                                            weekend.</p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <small class="text-muted">start date: 16-Jul-2022 | finish date:
+                                            17-Jul-2022</small>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <img class="card-img-top" src="{% static '/images/dublin-pride.jpeg' %}"
+                                        alt="Card image cap">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-info">Dublin Pride 2022</h5>
+                                        <p class="card-text">In 1974 just ten people marched for one of the first pride
+                                            events in Dublin. Over sixty-thousand people showed up in 2019.
+                                            Dublin Pride 2022 will be taking place from June 22nd to June 26th, with the
+                                            main Pride march and parade taking place on Saturday 25 June at 12pm.
+                                            Throughout the whole month of June, you can expect a wide range of pride
+                                            events in the city and the county!</p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <small class="text-muted">start date: 22-Jun-2022 | finish date:
+                                            26-Jun-2022</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="carousel-item">
+                            <div class="card-group">
+                                <div class="card">
+                                    <img class="card-img-top" src="{% static '/images/mighty-hoopla.jpeg' %}"
+                                        alt="Card image cap">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-info">Mighty Hoopla 2023</h5>
+                                        <p class="card-text">Mighty Hoopla is the biggest LGBT pop festival in London.
+                                            It’ll be taking place in Brockwell Park on June 3rd 2023. Headliners are yet
+                                            to be announced.
+                                            Previous headliners have included All Saints, Chaka Khan and Bananarama.
+                                            Headliners for 2022 included the Sugababes, Anastacia and Kim Wilde.
+                                            It’s guaranteed to be one of the most fun gay events in London next summer.
+                                            Tickets on sale now.
+                                        </p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <small class="text-muted">start date: 03-Jun-2023</small>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <img class="card-img-top" src="{% static '/images/madrid-pride.jpeg' %}"
+                                        alt="Card image cap">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-info">Madrid Pride Orgullo MADO 2022</h5>
+                                        <p class="card-text">Madrid Orgullo ‘MADO’ is perhaps the largest and one of the
+                                            most popular gay Pride events in all of Europe, attracting two million
+                                            people each year.
+                                            In 2022, this 10-day festival is taking place from 1st to 10th July. Expect
+                                            fantastic shows, activities, dance parties, club nights, lots of food,
+                                            drinks and fun surprises at Madrid Pride. It takes place in the Chueca
+                                            neighborhood where you’ll find Madrid’s extensive gay scene.</p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <small class="text-muted">start date: 01-Jul-2022 | finish date:
+                                            10-Jul-2022</small>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <img class="card-img-top" src="{% static '/images/san-francisco-pride.jpeg' %}" alt="Card image cap">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-info">San Francisco Pride 2022</h5>
+                                        <p class="card-text">San Francisco Pride holds one of the oldest and largest
+                                            annual LGBTQ+ parades in the world. With hundreds of thousands of people
+                                            flooding into the city every year to experience the parade and immerse
+                                            themselves in the celebrations.
+                                            The festival includes 20+ live stages at the Civic Centre Plaza, showcasing
+                                            the diverse talent within the LGBTQ+ community in San Francisco and beyond.
+                                            San Francisco Pride 2022 is taking place on Sunday, 26 June 2022.</p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <small class="text-muted">start date: 26-Jun-2022</small>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselEvents" role="button"
+                            data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselEvents" role="button"
+                            data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-  <!-- Hero -->
+    <!-- Hero -->
 
-{% endblock%}
-
+    {% endblock%}
