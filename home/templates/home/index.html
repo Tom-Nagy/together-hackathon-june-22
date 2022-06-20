@@ -7,31 +7,36 @@
 
 <!-- Hero -->
 <div class="hero overlay">
-    <div class="container">
-        <div class="row align-content-center justify-content-between">
-            <div class="col-lg-5 box">
-                <a href="#">
-                    <span class="icon-play"></span>
-                    <img class="img-fluid img-shadow" src="{% static 'images/love-unites.jpeg' %}"
-                        alt="Image of a fist with a rainbow on it representing unity." />
-                </a>
-            </div>
-            <div class="col-lg-6 mb-4 mb-lg-0 text-center text-lg-left">
-                <p class="text-50 sdac text-uppercase text-center text-lg-left mt-5">
-                    share. discuss. ask. connect
-                </p>
-                <h1 class="heading font-weight-bold text-center text-lg-left">
-                    We are a Community
-                </h1>
-                <p class="text-50 mb-5 text-center text-lg-left">
-                    The Human Experience begins when you allow it. Share and Explore the world. Our Community awaits.
-                </p>
-                <p class="text-center text-lg-left">
-                    <a class="btn btn--cta btn--black" href="{% url 'account_signup' %}"
-                        aria-label="Link to create an account page.">Join the Community</a>
-                </p>
-            </div>
-        </div>
+
+  <div class="container">
+    <div class="row align-content-center justify-content-between">
+      <div class="col-lg-5 box">
+        <a href="#">
+          <span class="icon-play"></span>
+          <img class="img-fluid img-shadow" src="{% static 'images/love-unites.jpeg' %}"
+            alt="Image of a fist with a rainbow on it representing unity." />
+        </a>
+      </div>
+      <div class="col-lg-6 mb-4 mb-lg-0 text-center text-lg-left">
+        <p class="text-50 sdac text-uppercase text-center text-lg-left mt-5">
+          share. discuss. ask. connect
+        </p>
+        <h1 class="heading font-weight-bold text-center text-lg-left">
+          We are a Community
+        </h1>
+        <p class="text-50 mb-5 text-center text-lg-left">
+          The Human Experience begins when you allow it. Share and Explore the world. Our Community awaits.
+        </p>
+        {% if request.user.is_authenticated %}
+          <a class="btn btn--cta btn--black join" href="{% url 'chatrooms' %}" aria-label="Link to create an account page.">
+            Join the Community
+          </a>
+        {% else %}
+          <a class="btn btn--cta btn--black join" href="{% url 'account_signup' %}" aria-label="Link to create an account page.">
+            Join the Community
+          </a>
+        {% endif %}
+      </div>
     </div>
 </div>
 <!-- Hero -->
