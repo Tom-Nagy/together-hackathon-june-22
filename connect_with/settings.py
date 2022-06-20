@@ -37,7 +37,6 @@ DEBUG = 'DEVELOPMENT' in os.environ
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'connect-with.herokuapp.com']
 CSRF_TRUSTED_ORIGINS = ['localhost', '127.0.0.1', 'connect-with.herokuapp.com']
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -112,7 +111,6 @@ AUTHENTICATION_BACKENDS = [
 # used for social media account login with contrib.sites
 SITE_ID = 1
 
-
 # sign in and login specs
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_EMAIL_REQUIRED = True
@@ -123,7 +121,6 @@ LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/'
 
 WSGI_APPLICATION = 'connect_with.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
@@ -158,7 +155,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
@@ -172,15 +168,12 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static")
-
-
 
 # for media files
 # MEDIA_URL = '/media/'

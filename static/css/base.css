@@ -19,10 +19,6 @@ h3 {
     color: #6a9eb0;
 }
 
-/* p {
-    max-width: 60ch;
-} */
-
 /* --------------------------Nav bar */
 .site-nav {
     padding-top: 3vw;
@@ -44,9 +40,6 @@ h3 {
     font-family: "Poppins";
     font-weight: 400;
 }
-
-
-
 
 /* --------------------------Buttons */
 .btn,
@@ -86,16 +79,17 @@ a:active,
 a:focus {
     text-decoration: underline;
     color: #0d0d0d;
-    text-shadow: .5px 0.5px 1px #b1e9fc;
+    text-shadow: .5px 0.5px 2px #b1e9fc;
 }
 
 .btn--cta {
     font-weight: bold;
-    width: 160px;
-    border-radius: 0;
-    padding: 15px 5px;
-    width: 200px;
+    border-radius: 5px;
+    padding: 12px 6px;
+}
 
+.join {
+    width: 200px;
 }
 
 .btn--black {
@@ -148,6 +142,10 @@ a:focus {
     background-color: #8ab4c2 !important;
 }
 
+.bg-brown{
+    background-color: #634628;
+}
+
 /* --------------------------------------- Toasts messages */
 
 .message-container {
@@ -174,7 +172,6 @@ a:focus {
 
 .sdac {
     letter-spacing: 2px;
-
 }
 
 .heading {
@@ -195,7 +192,7 @@ a:focus {
 
 .allauth-form-inner-content input {
     border-color: #000;
-    border-radius: 0;
+    border-radius: 5px;
 }
 
 .allauth-form-inner-content label:not([for='id_remember']) {
@@ -226,7 +223,7 @@ a:focus {
     margin-left: 6px;
     font-size: 1rem;
     line-height: 1.5;
-    border-radius: 0;
+    border-radius: 5px;
 
     /* standard bootstrap btn transitions */
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
@@ -355,3 +352,34 @@ a:focus {
         padding: 10px 15px;
     }
 }
+
+/* -------------------------------- chatroom */
+
+.chatroom-link .card {
+    max-width: 360px;
+}
+
+.chatroom-link:hover .card {
+    cursor: pointer;
+    transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+
+    transition-property: transform;
+    -o-transition-property: transform;
+    -ms-transition-property: transform;
+    -moz-transition-property: transform;
+    -webkit-transition-property: transform;
+    
+    transition-duration: 500ms;
+    -o-transition-duration: 500ms;
+    -ms-transition-duration: 500ms;
+    -moz-transition-duration: 500ms;
+    -webkit-transition-duration: 500ms;
+
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
