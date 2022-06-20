@@ -5,38 +5,246 @@
 
 {% block content %}
 
-  <!-- Hero -->
-  <div class="hero overlay">
-    <div class="container">
-      <div class="row align-content-center justify-content-between">
-        <div class="col-lg-5 box">
-          <a href="#">
-            <span class="icon-play"></span>
-            <img
-              class="img-fluid img-shadow"
-              src="{% static 'images/love-unites.jpeg' %}"
-              alt="Image of a fist with a rainbow on it representing unity."
-            />
+<!-- Hero -->
+<div class="hero overlay">
+
+  <div class="container">
+    <div class="row align-content-center justify-content-between">
+      <div class="col-lg-5 box">
+        <a href="#">
+          <span class="icon-play"></span>
+          <img class="img-fluid img-shadow" src="{% static 'images/love-unites.jpeg' %}"
+            alt="Image of a fist with a rainbow on it representing unity." />
+        </a>
+      </div>
+      <div class="col-lg-6 mb-4 mb-lg-0 text-center text-lg-left">
+        <p class="text-50 sdac text-uppercase text-center text-lg-left mt-5">
+          share. discuss. ask. connect
+        </p>
+        <h1 class="heading font-weight-bold text-center text-lg-left">
+          We are a Community
+        </h1>
+        <p class="text-50 mb-5 text-center text-lg-left">
+          The Human Experience begins when you allow it. Share and Explore the world. Our Community awaits.
+        </p>
+        {% if request.user.is_authenticated %}
+          <a class="btn btn--cta btn--black join" href="{% url 'chatrooms' %}" aria-label="Link to create an account page.">
+            Join the Community
           </a>
-        </div>
-        <div class="col-lg-6 mb-4 mb-lg-0 text-center text-lg-left">
-          <p class="text-50 sdac text-uppercase text-center text-lg-left mt-5">
-            share.  discuss.  ask.  connect
-          </p>
-          <h1 class="heading font-weight-bold text-center text-lg-left">
-            We are a Community  
-          </h1>
-          <p class="text-50 mb-5 text-center text-lg-left">
-            The Human Experience begins when you allow it. Share and Explore the world. Our Community awaits. 
-          </p>
-          <p class="text-center text-lg-left">
-            <a class="btn btn--cta btn--black" href="{% url 'account_signup' %}" aria-label="Link to create an account page.">Join the Community</a>
-          </p>
-        </div>
+        {% else %}
+          <a class="btn btn--cta btn--black join" href="{% url 'account_signup' %}" aria-label="Link to create an account page.">
+            Join the Community
+          </a>
+        {% endif %}
       </div>
     </div>
-  </div>
-  <!-- Hero -->
+</div>
+<!-- Hero -->
+
+<!-- Events -->
+<div class="container-fluid mb-5">
+    <div class="row">
+        <div class="col-md-3 align-self-center justify-content-center text-center">
+            <div class="row">
+                <div class="col-12">
+                    <h2>Upcoming<br />Events</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+
+
+
+
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="card-group">
+                            <div class="event-card">
+                                <a class="Card-sc event-layout"
+                                    href="https://www.timeout.com/london/things-to-do/desire-love-identity-exploring-lgbtq-histories">
+                                    <div class="card-overflow event-img">
+                                        <div class="event-img-wrapper">
+                                            <div class="card-style event-img-position img-style">
+                                                <img src="{% static 'images/pride-flag.jpeg'%}"
+                                                    alt="picture of lgbt flag" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-content">
+                                        <span class="event-date">
+                                            <p>Wed, 24 Jun - Thu, 30 July • 12:00 - 12:00</p>
+                                        </span>
+                                        <h3 class="event-title">Exploring LGBTQ Histories</h3>
+                                        <p class="event-address">
+                                            British Museum 44 Great Russell St
+                                        </p>
+
+                                        <div>
+                                            <span class="event-details"> Event details </span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="event-card">
+                                <a class="Card-sc event-layout"
+                                    href="https://www.timeout.com/london/things-to-do/london-trans-pride">
+                                    <div class="card-overflow event-img">
+                                        <div class="event-img-wrapper">
+                                            <div class="card-style event-img-position img-style">
+                                                <img src="{% static 'images/trans.jpeg' %}"
+                                                    alt="Picture of trans man" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-content">
+                                        <span class="event-date">
+                                            <p>
+                                                Thu, 9 July•; 12:00 - 12:00
+                                            </p>
+                                        </span>
+                                        <h3 class="event-title">London Trans+ Pride</h3>
+                                        <p class="event-address">Various London locations</p>
+
+                                        <div>
+                                            <span class="event-details"> Event details </span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="event-card">
+                                <a class="Card-sc event-layout"
+                                    href="https://www.eventbrite.co.uk/e/pride-at-greenwich-tickets-338988984177">
+                                    <div class="card-overflow event-img">
+                                        <div class="event-img-wrapper">
+                                            <div class="card-style event-img-position img-style">
+                                                <img src="{% static 'images/rainbow.jpg' %}"
+                                                    alt="rainbow with historic building" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-content">
+                                        <span class="event-date">
+                                            <p>
+                                                fri, 24 Jun• 18:00 - 21:00
+                                            </p>
+                                        </span>
+                                        <h3 class="event-title">Greenwich Uni Pride</h3>
+                                        <p class="event-address">Lower Deck Greenwich Union</p>
+
+                                        <div>
+                                            <span class="event-details"> Event details </span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="card-group">
+                            <div class="event-card">
+                                <a class="Card-sc event-layout"
+                                    href="https://www.travelgay.com/event/amsterdam-gay-pride/">
+                                    <div class="card-overflow event-img">
+                                        <div class="event-img-wrapper">
+                                            <div class="card-style event-img-position img-style">
+                                                <img src="{% static 'images/ams-pride.jpeg'%}"
+                                                    alt="picture of Pride Amsterdam" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-content">
+                                        <span class="event-date">
+                                            <p>
+                                                Sat, 30 July• 18:00 - 21:00
+                                            </p>
+                                        </span>
+                                        <h3 class="event-title">Pride Amsterdam 2022</h3>
+                                        <p class="event-address">
+                                            Unlike most cities, this one takes place on a canal!
+                                        </p>
+
+                                        <div>
+                                            <span class="event-details"> Event details </span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="event-card">
+                                <a class="Card-sc event-layout"
+                                    href="https://www.travelgay.com/event/berlin-gay-pride/">
+                                    <div class="card-overflow event-img">
+                                        <div class="event-img-wrapper">
+                                            <div class="card-style event-img-position img-style">
+                                                <img src="{% static 'images/berlin-pride.jpeg' %}"
+                                                    alt="Picture of Berlin Gay Pride" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-content">
+                                        <span class="event-date">
+                                            <p>
+                                                Sat, 23 July• 12:00 - 12:00
+                                            </p>
+                                        </span>
+                                        <h3 class="event-title">Berlin Gay Pride CSD 2022</h3>
+                                        <p class="event-address">Various Berlin locations</p>
+
+                                        <div>
+                                            <span class="event-details"> Event details </span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="event-card">
+                                <a class="Card-sc event-layout"
+                                    href="https://www.travelgay.com/event/long-beach-pride-postponed/">
+                                    <div class="card-overflow event-img">
+                                        <div class="event-img-wrapper">
+                                            <div class="card-style event-img-position img-style">
+                                                <img src="{% static 'images/long-beach-pride.jpeg' %}"
+                                                    alt="picture of Long Beach Pride" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-content">
+                                        <span class="event-date">
+                                            <p>
+                                                Fri, 8 July• 18:00 - 21:00
+                                            </p>
+                                        </span>
+                                        <h3 class="event-title">Long Beach Pride 2022</h3>
+                                        <p class="event-address">Shoreline Drive in downtown</p>
+
+                                        <div>
+                                            <span class="event-details"> Event details </span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <a class="carousel-control-prev text-dark" href="#carouselExampleIndicators" role="button"
+                    data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 {% endblock%}
-

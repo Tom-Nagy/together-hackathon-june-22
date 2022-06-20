@@ -4,12 +4,19 @@
 {% block content %}
 <div class="container-fluid my-4">
     <div class="row">
-        <div class="col-10 offset-1 border text-center bg-info rounded">
+        <!-- back to chatroom button -->
+        <div class="position-fixed">
+            <span class="float-left">
+                <a href="{% url 'chatrooms' %}" aria-label="Link to chatrooms page."
+                    class="btn rounded ml-3 btn--black">Back</a>
+            </span>
+        </div>
+        <div class="col-8 offset-2 border text-center bg-info rounded">
             <h3 class="text-center black py-3">{{ chatroom.name }}</h3>
             <p>{{ chatroom.subject }}</p>
         </div>
         {% for i in chatroom.comment.all %}
-            <div class="col-10 offset-1 border bg-light p-4 mt-4 rounded">
+            <div class="col-8 offset-2 border bg-light p-4 mt-4 rounded">
                 <p>
                     <i class="fa-solid fa-user"></i> {{ i.user }} <br>
                     <small class="text-muted">{{ i.date }}</small>
@@ -21,7 +28,7 @@
     </div>
 
     <div class="row">
-        <div class="col-10 offset-1 px-0 my-4">
+        <div class="col-8 offset-2 px-0 my-4">
             <form action="{% url 'chatroom_detail' chatroom.chatroom_id %}" method="POST">
                 {% csrf_token %}
                 {{ add_comment_form | crispy }}
@@ -30,14 +37,4 @@
         </div>
     </div>
 </div>
-{% endblock %}
-
-
-{% block postloadjs %}
-    <script>
-        // Prevents resubmission of forms on page refresh
-        if ( window.history.replaceState ) {
-          window.history.replaceState( null, null, window.location.href );
-        }
-    </script>
 {% endblock %}

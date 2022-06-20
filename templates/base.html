@@ -24,7 +24,7 @@
                 rel="stylesheet">
             <!-- styles and favicon -->
             <link rel="stylesheet" href="{% static 'css/base.css' %}">
-            <link rel="shortcut icon" type="image/jpg" href="{% static 'images/favicon.ico' %}" />
+            <link rel="shortcut icon" type="image/jpg" href="{% static 'images/favicon-32x32.png' %}" />
             <script src="https://kit.fontawesome.com/09f433170b.js" crossorigin="anonymous"></script>
         {% endblock %}
 
@@ -88,10 +88,11 @@
                 </button>
                 <div class="collapse navbar-collapse site-navigation" id="navbarNavDropdown">
                     <ul class="navbar-nav ml-auto site-menu">
+                        <!-- About us button trigger modal -->
                         <li class="nav-item active">
-                            <a class="nav-link" href="#"
-                            >About us <span class="sr-only">(current)</span></a
-                            >
+                            <a class="nav-link" data-toggle="modal" data-target="#about-us-modal">
+                                About us
+                            </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'chatrooms' %}" aria-label="Link to the chatroom page.">Chat rooms</a>
@@ -118,8 +119,8 @@
                             <a class="nav-link" href="{% url 'account_logout' %}" aria-label="Link to log out page.">Log out</a>
                         </li>
                     {% else %}
-                        <a class="btn btn--cta btn--black" href="{% url 'account_login' %}" aria-label="Link to log in page.">Sign in</a>
-                        <a class="btn btn--cta btn--black" href="{% url 'account_signup' %}" aria-label="Link to create an account page.">Sign up</a>
+                        <a class="btn btn--cta btn--black px-3 py-2" href="{% url 'account_login' %}" aria-label="Link to log in page.">Sign in</a>
+                        <a class="btn btn--cta btn--black px-3 py-2" href="{% url 'account_signup' %}" aria-label="Link to create an account page.">Sign up</a>
                     {% endif %}
                 </div>
             </div>
@@ -128,6 +129,25 @@
 
         {% block content %}
         {% endblock %}
+
+        <!-- About modal -->
+        <div class="modal fade" id="about-us-modal" data-backdrop="static" data-keyboard="false" tabindex="-1" 
+        aria-labelledby="about-us-modal-label" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body bg-offwhite">
+                        <h5 class="modal-title brown" id="about-us-modal-label">About us</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <p class="dark-blue">
+                            We are a community base platform that want to provide a safe space for people to express themselves.<br/>
+                            We want to enable people to share their experiences and discoveries for a better world.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         {% block postloadjs %}
             <script>
