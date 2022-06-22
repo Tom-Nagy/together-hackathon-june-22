@@ -125,7 +125,7 @@ a:focus {
 }
 
 .offwhite {
-    color: #f2f2f2;
+    color: #f2f2f2 !important;
 }
 
 /* background */
