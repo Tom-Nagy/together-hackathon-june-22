@@ -10,6 +10,13 @@
                 <button class="btn btn-success ml-1 ml-md-3 ml-lg-5" type="button" data-toggle="modal" data-target="#myModal">
                     Open a new chatroom <i class="fa-solid fa-plus pl-1"></i>
                 </button>
+            {% else %}
+                <p class="text-center mx-auto py-3">
+                    Please <a class="text-info" href="{% url 'account_login' %}" aria-label="Link to log in page.">Sign in</a> or
+                    <a class="text-info" href="{% url 'account_signup' %}"
+                        aria-label="Link to create an account page.">Register</a>
+                    to <strong>create</strong> a chatroom.
+                </p>
             {% endif %}
         </div>
     </div>

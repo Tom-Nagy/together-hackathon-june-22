@@ -35,7 +35,7 @@ h3 {
     padding-right: 15px;
 }
 
-.site-menu li a {
+.site-menu-link {
     letter-spacing: 1px;
     font-family: "Poppins";
     font-weight: 400;

@@ -17,24 +17,24 @@
             <p>{{ chatroom.subject }}</p>
         </div>
         {% if request.user.is_authenticated %}
-        <div class="col-12">
-            <div class="row">
-                <div class="col-8 offset-2 px-0 my-4">
-                    <form action="{% url 'chatroom_detail' chatroom.chatroom_id %}" method="POST">
-                        {% csrf_token %}
-                        {{ add_comment_form | crispy }}
-                        <button class="btn btn-success" type="submit">Send</button>
-                    </form>
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-8 offset-2 px-0 my-4">
+                        <form action="{% url 'chatroom_detail' chatroom.chatroom_id %}" method="POST">
+                            {% csrf_token %}
+                            {{ add_comment_form | crispy }}
+                            <button class="btn btn-success" type="submit">Send</button>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
         {% else %}
-        <p class="text-center py-3">
-            Please <a class="text-info" href="{% url 'account_login' %}" aria-label="Link to log in page.">Login</a> or
-            <a class="text-info" href="{% url 'account_signup' %}"
-                aria-label="Link to create an account page.">Register</a>
-            to participate in the discussions.
-        </p>
+            <p class="text-center mx-auto py-3 mt-5">
+                Please <a class="text-info" href="{% url 'account_login' %}" aria-label="Link to log in page.">Sign in</a> or
+                <a class="text-info" href="{% url 'account_signup' %}"
+                    aria-label="Link to create an account page.">Register</a>
+                to participate in the discussions.
+            </p>
         {% endif %}
         {% for comment in comments %}
         <div class="col-8 offset-2 border bg-light p-4 mt-4 rounded">
