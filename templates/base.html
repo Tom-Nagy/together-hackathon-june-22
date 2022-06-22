@@ -90,17 +90,17 @@
                     <ul class="navbar-nav ml-auto site-menu">
                         <!-- About us button trigger modal -->
                         <li class="nav-item active">
-                            <a class="nav-link" data-toggle="modal" data-target="#about-us-modal">
+                            <a class="nav-link site-menu-link" data-toggle="modal" data-target="#about-us-modal">
                                 About us
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'chatrooms' %}" aria-label="Link to the chatroom page.">Chat rooms</a>
+                            <a class="nav-link site-menu-link" href="{% url 'chatrooms' %}" aria-label="Link to the chatroom page.">Chat rooms</a>
                         </li>
                         <!-- log out -->
                         {% if request.user.is_authenticated %}
                             <li class="nav-item mr-2 d-block d-sm-none">
-                                <a class="nav-link" href="{% url 'account_logout' %}" aria-label="Link to log out page.">Log out</a>
+                                <a class="nav-link site-menu-link" href="{% url 'account_logout' %}" aria-label="Link to log out page.">Sign out</a>
                             </li>
                         {% else %}
                             <li class="nav-item mr-2 d-block d-sm-none">
@@ -115,7 +115,7 @@
 
                 <div class="d-none d-md-block">
                     {% if request.user.is_authenticated %}
-                        <a class="nav-link" href="{% url 'account_logout' %}" aria-label="Link to log out page.">Log out</a>
+                        <a class="nav-link site-menu-link" href="{% url 'account_logout' %}" aria-label="Link to log out page.">Sign out</a>
                     {% else %}
                         <a class="btn btn--cta btn--black px-3 py-2" href="{% url 'account_login' %}" aria-label="Link to log in page.">Sign in</a>
                         <a class="btn btn--cta btn--black px-3 py-2" href="{% url 'account_signup' %}" aria-label="Link to create an account page.">Sign up</a>
