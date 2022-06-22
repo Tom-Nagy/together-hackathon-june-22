@@ -100,7 +100,7 @@
                         <!-- log out -->
                         {% if request.user.is_authenticated %}
                             <li class="nav-item mr-2 d-block d-sm-none">
-                                <a class="nav-link site-menu-link" href="{% url 'account_logout' %}" aria-label="Link to profile page.">Profile</a>
+                                <a class="nav-link site-menu-link" href="{% url 'profile' %}" aria-label="Link to profile page.">Profile</a>
                             </li>
                             <li class="nav-item mr-2 d-block d-sm-none">
                                 <a class="nav-link site-menu-link" href="{% url 'account_logout' %}" aria-label="Link to log out page.">Sign out</a>
@@ -118,7 +118,7 @@
 
                 <div class="d-none d-md-block">
                     {% if request.user.is_authenticated %}
-                        <a class="nav-link site-menu-link" href="{% url 'account_logout' %}" aria-label="Link to profile page.">Profile</a>
+                        <a class="nav-link site-menu-link" href="{% url 'profile' %}" aria-label="Link to profile page.">Profile</a>
                         <a class="nav-link site-menu-link" href="{% url 'account_logout' %}" aria-label="Link to log out page.">Sign out</a>
                     {% else %}
                         <a class="btn btn--cta btn--black px-3 py-2" href="{% url 'account_login' %}" aria-label="Link to log in page.">Sign in</a>
