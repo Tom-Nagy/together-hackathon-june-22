@@ -8,8 +8,8 @@ from django.dispatch import receiver
 
 class UserProfile(models.Model):
     ''' Model that define user profile information '''
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    username = models.CharField(max_length=50, null=True, blank=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE,
+                                related_name='user_profile')
     about = models.TextField(max_length=2000, null=True, blank=True)
     image = models.ImageField(null=True, blank=True)
     make_public = models.BooleanField(default=False)
@@ -25,4 +25,4 @@ def create_or_update_user_profile(sender, instance, created, **kwargs):
     if created:
         UserProfile.objects.create(user=instance)
     # If existing user, just save
-    instance.userprofile.save()
+    instance.user_profile.save()

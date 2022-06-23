@@ -58,11 +58,11 @@ Unregistered user have a read only access and if they want to participate to dis
 
 ### Developer and Business Goals
 
-* Develop a viable web application.
-* Develop a user-friendly application.
-* Develop a web application with space for improvement and optimization.
-* Promote wellness and togetherness.
-* Provide a safe platform where communities can share and talk freely.
+- Develop a viable web application.
+- Develop a user-friendly application.
+- Develop a web application with space for improvement and optimization.
+- Promote wellness and togetherness.
+- Provide a safe platform where communities can share and talk freely.
 
 [**:back:** *Table of Content*](#Table-of-Content)
 
@@ -70,7 +70,7 @@ Unregistered user have a read only access and if they want to participate to dis
 
 ### Audience definition
 
-* The targeted audience is You, Me and Everyone else!
+- The targeted audience is You, Me and Everyone else!
 
 ### User stories
 
@@ -90,16 +90,16 @@ Considering the targeted audience, the sans serif type of font is the more appro
 
 The website will use well known and popular font that are used online in order to bring to the user a "feeling of knowing".
 
-* Poppins for headings.
+- Poppins for headings.
 
-* Lato for main content.
+- Lato for main content.
 
 Sans serif will be use as a fall back if the fonts do not load. It is common as the main typographies are sans serif type.
 
 #### Icons
 
-* Some Font Awesome icons will be part of the website for better UX.
-* The [favicon](static/images/favicon.ico) was created from [favicon.io](https://favicon.io/favicon-converter/).
+- Some Font Awesome icons will be part of the website for better UX.
+- The [favicon](static/images/favicon.ico) was created from [favicon.io](https://favicon.io/favicon-converter/).
 
 ![Favicon](documentation/favicon/favicon.png)
 
@@ -109,11 +109,11 @@ Sans serif will be use as a fall back if the fonts do not load. It is common as 
 
 The colours chosen for the website are simple.
 
-* #325663
-* #b1e9fc
-* #634628
-* #b08e6a
-* #6a9eb0
+- #325663
+- #b1e9fc
+- #634628
+- #b08e6a
+- #6a9eb0
 
 [Adobe Color](https://color.adobe.com) explore was used to find the colour scheme with the community keyword. Compatibility and accessibility are valid and the color scheme and swatches are said color-blind safe by the accessibility tools.
 
@@ -133,6 +133,7 @@ There is a hero image to give some weight to the landing page and pictures in th
 ![Site map](documentation/wireframes/site-map.png)
 
 ![Home page](documentation/wireframes/home.png)
+![Profile page](documentation/wireframes/profile.png)
 ![About-us page](documentation/wireframes/about-us.png)
 ![Chat-room page](documentation/wireframes/chat-room.png)
 ![mobile page](documentation/wireframes/mobile.png)
@@ -145,6 +146,12 @@ There is a hero image to give some weight to the landing page and pictures in th
   - ![Navigation bar](documentation/features/navbar.png)
 
 - It is important to note that other functionalities are available through the url/admin accessing Django admin interface.
+
+### Profile
+
+Profile allows users to customize their profile information. When a user sign up, a profile is automatically created so the post are published under the user username.  
+If a User changes its profile information accessible from the profile page and makes it public, then his information are displayed when posting a comment (i.e. picture, username), otherwise only the username is displayed and accessible.  
+User profile information will be accessible as a popup upon clicking on the user username displaying picture, username, email and about me profile information.
 
 ### Chatrooms
 
@@ -186,6 +193,18 @@ As a framework Django works with relational databases.
 - For Production, Postgres is used. It is the database provided by Heroku when deploying the website live.
 
 ### Database design
+
+- Profile Model
+  - Within the profile app, the UserProfile model define how the data will be stored for a user.
+
+| Name | Key in db | Validation | Field Type |
+| ----------- | ----------- | ----------- | ----------- |
+| chatroom_id | chatroom_id | primary_key=True | AutoField |
+| user | user | on_delete=models.CASCADE, related_name='user_profile' | ForeignKey to User |
+| username | username | max_length=50, blank=True, null=True | CharField |
+| about | about | max_length=2000, blank=True, null=True | TexField |
+| image | image | blank=True, null=True | ImageField |
+| make_public | make_public | default=False | BooleanField |
 
 - Chatroom Model
   - Within the chatrooms app, the Chatroom model holds the data needed for different chatrooms.
