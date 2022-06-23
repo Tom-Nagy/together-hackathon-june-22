@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import event
+from .models import Event
 
 # Register your models here.
 
@@ -12,4 +12,4 @@ class AdminEvents(admin.ModelAdmin):
     ordering= ('-date',)
 
 
-admin.site.register(event, AdminEvents)
+admin.site.register(Event, AdminEvents)

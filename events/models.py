@@ -1,8 +1,8 @@
 from django.db import models
 
-class event(models.Model):
+class Event(models.Model):
     class Meta:
-        db_table = 'events'
+        db_table = 'Event'
 
     event_id= models.AutoField(primary_key=True)
     event_name= models.CharField(max_length=50, blank=False, null=False)
