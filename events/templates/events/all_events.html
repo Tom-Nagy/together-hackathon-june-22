@@ -5,4 +5,29 @@
 
 {% block content %}
 <h1>All events</h1>
+<div class="container">
+    <div class="row">
+        {% for event in events %}
+        <div class="col">
+            {{ event.event_name }}
+            {{ event.date }}
+            {{ event.location }}
+            {% if event.image %}
+                <img src="{{ event.image.url }}" alt="img">
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <h3>Add new event</h3>
+            <form action="{% url 'all_events' %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button class="btn btn-success" type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock %}
