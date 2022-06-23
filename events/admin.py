@@ -1,4 +1,5 @@
 from django.contrib import admin
+
 from .models import event
 
 # Register your models here.
@@ -13,3 +14,4 @@ class AdminEvents(admin.ModelAdmin):
 
 
 admin.site.register(event, AdminEvents)
+

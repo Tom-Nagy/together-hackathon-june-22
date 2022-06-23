@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class event(models.Model):
     class Meta:
         db_table = 'events'
@@ -13,3 +14,4 @@ class event(models.Model):
 
     def __str__(self):
         return self.event_name
+
