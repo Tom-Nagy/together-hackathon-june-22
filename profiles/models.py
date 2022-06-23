@@ -8,7 +8,8 @@ from django.dispatch import receiver
 
 class UserProfile(models.Model):
     ''' Model that define user profile information '''
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE,
+                                related_name='user_profile')
     username = models.CharField(max_length=50, null=True, blank=True)
     about = models.TextField(max_length=2000, null=True, blank=True)
     image = models.ImageField(null=True, blank=True)
