@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'home',
     'chatrooms',
     'profiles',
+    'events',
 
     # other
     'crispy_forms',
