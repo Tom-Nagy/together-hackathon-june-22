@@ -48,6 +48,10 @@
                             <form action="{% url 'profile' %}" method="POST">
                                 <div class="modal-body text-left">
                                     {% csrf_token %}
+                                    <input class="form-control mb-2" type="text" id="username" name="username" placeholder="Username" 
+                                    value="{{ request.user.username }}">
+                                    <input class="form-control mb-2" type="text" id="email" name="email" placeholder="Email" 
+                                    value="{{ request.user.email }}">
                                     {% for field in profile_form %}
                                         <!-- display field as crispy except for the custom widget for image  -->
                                         {% if field.name != 'image' %}

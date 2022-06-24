@@ -2,6 +2,7 @@
 
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.contrib import messages
 
 from .models import UserProfile
@@ -16,9 +17,19 @@ def profile(request):
 
     if request.method == 'POST':
         # update user profile information
-        profile_form = UserProfileForm(request.POST, instance=user_profile)
+        profile_form = UserProfileForm(request.POST, request.FILES,
+                                       instance=user_profile)
         if profile_form.is_valid():
             profile_form.save()
+
+            # Update User info
+            user = User.objects.get(username=request.user.username)
+            username = request.POST['username']
+            email = request.POST['email']
+            user.username = username
+            user.email = email
+            user.save()
+
             messages.success(request, 'Profile updated successfully')
         else:
             messages.error(request, 'something went wrong \

@@ -384,7 +384,8 @@ event-title {
     border: #28a745;
     border-radius: 5px;
     padding: 10px;
-    margin: 3px;
+    margin: 10px 0;
+    vertical-align: sub;
 }
 
 .select-image-btn:hover,
