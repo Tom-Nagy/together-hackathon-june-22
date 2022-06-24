@@ -4,8 +4,19 @@ from django import forms
 from .models import Event
 
 
-class AddEventForm(forms.ModelForm):
-    ''' Configure the Event form '''
+class DateField(forms.ModelForm):
+    """
+    A class to create date picker
+    """
+    date = forms.DateField(
+    widget=forms.TextInput(
+        attrs={'type': 'date'}
+    )
+)
+
+
+class AddEventForm(DateField):
+    ''' Configure the Event form'''
     class Meta:
         ''' Form meta properties '''
         model = Event
