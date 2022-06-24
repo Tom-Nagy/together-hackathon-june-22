@@ -167,10 +167,6 @@ a:focus {
     padding-bottom: 10rem;
 }
 
-.img-fluid {
-    margin-top: 50px;
-}
-
 .sdac {
     letter-spacing: 2px;
 }
@@ -336,26 +332,6 @@ event-title {
     background-size: 100% 100%;
 }
 
-/*------------------------------------Media */
-@media screen and (min-width: 768px) {
-    .event-img {
-        padding-top: 60%;
-    }
-}
-
-@media screen and (min-width: 1024px) {
-    .event-card {
-        width: 31.33%;
-    }
-}
-
-
-@media screen and (min-width: 1024px) {
-    .event-card {
-        padding: 10px 15px;
-    }
-}
-
 /* -------------------------------- chatroom */
 
 .chatroom-link .card {
@@ -384,4 +360,34 @@ event-title {
 
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/*------------------------------------ Profile */
+
+.profile-image {
+    height: 90px;
+    width: 90px;
+    border-radius: 50%;
+}
+
+
+
+/*------------------------------------Media */
+@media screen and (min-width: 768px) {
+    .event-img {
+        padding-top: 60%;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .event-card {
+        width: 31.33%;
+    }
+}
+
+
+@media screen and (min-width: 1024px) {
+    .event-card {
+        padding: 10px 15px;
+    }
 }

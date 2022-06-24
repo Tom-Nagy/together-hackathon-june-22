@@ -7,17 +7,17 @@
 <div class="container-fluid my-4">
     <div class="row">
         <div class="col">
-            <h2>{{ request.user.username }}'s profile</h2>
+            <h2 class="text-center mx-auto mb-5">{{ request.user.username }}'s profile</h2>
         </div>
     </div>
     <div class="row">
-        <div class="col-4">
+        <div class="col text-right mr-5">
             {% if user_profile.image %}
                 <a href="{{ user_profile.image.url }}" target="_blank" aria-label="Link to view the profile picture.">
-                    <img class="img-fluid" src="{{ user_profile.image.url }}" alt="profile picture">
+                    <img class="img-fluid profile-image mr-4" src="{{ user_profile.image.url }}" alt="profile picture">
                 </a>
             {% else %}
-                <img class="img-fluid" src=" {{ MEDIA_URL }}default-image.png" alt="default profile picture">
+                <img class="img-fluid profile-image mr-4" src=" {{ MEDIA_URL }}default-image.png" alt="default profile picture">
             {% endif %}
             <form action="" method="" id="make-profile-public-form">
                 <div class="ml-4">
@@ -28,23 +28,22 @@
                 </div>
             </form>
         </div>
-        <div class="col-8">
-            <p>Username: {{ request.user.username}}</p>
-            <p>Email: {{ request.user.email}}</p>
+        <div class="col pl-0">
+            <p class="mb-1"><span class="text-muted">Username: </span>{{ request.user.username}}</p>
+            <p class="mb-2"><span class="text-muted">Email: </span>{{ request.user.email}}</p>
             <p>
-                About me:<br/>
+                <span class="text-muted">About me:</span><br/>
                 {% if user_profile.about %}
                     {{ user_profile.about }}
                 {% else %}
-                    <span class="text-muted">Tell us who you are ...</span>
+                    <span class="ml-2">Tell us who you are ...</span>
                 {% endif %}
             </p>
         </div>
     </div>
     <div class="row">
-        <div class="col-12">
-            <h3>Favorites</h3>
-        </div>
+        {% include 'profiles/includes/favorites-large-screen.html' %}
+        {% include 'profiles/includes/favorites-small-screen.html' %}
     </div>
 </div>
 {% endblock %}
