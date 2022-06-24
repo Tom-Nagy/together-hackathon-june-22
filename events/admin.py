@@ -1,7 +1,6 @@
 from django.contrib import admin
 from .models import Event
 
-# Register your models here.
 
 class AdminEvents(admin.ModelAdmin):
     list_display = (
@@ -9,7 +8,7 @@ class AdminEvents(admin.ModelAdmin):
         'date',
         'location',
     )
-    ordering= ('-date',)
+    ordering = ('-date',)
 
 
 admin.site.register(Event, AdminEvents)

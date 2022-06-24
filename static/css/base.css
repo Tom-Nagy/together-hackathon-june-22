@@ -41,7 +41,7 @@ h3 {
     font-weight: 400;
 }
 
-/* --------------------------Buttons */
+/* ---------- Buttons */
 .btn,
 button,
 a {
@@ -165,10 +165,6 @@ a:focus {
 .hero {
     padding-top: 3rem;
     padding-bottom: 10rem;
-}
-
-.img-fluid {
-    margin-top: 50px;
 }
 
 .sdac {
@@ -336,26 +332,6 @@ event-title {
     background-size: 100% 100%;
 }
 
-/*------------------------------------Media */
-@media screen and (min-width: 768px) {
-    .event-img {
-        padding-top: 60%;
-    }
-}
-
-@media screen and (min-width: 1024px) {
-    .event-card {
-        width: 31.33%;
-    }
-}
-
-
-@media screen and (min-width: 1024px) {
-    .event-card {
-        padding: 10px 15px;
-    }
-}
-
 /* -------------------------------- chatroom */
 
 .chatroom-link .card {
@@ -384,4 +360,84 @@ event-title {
 
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/*------------------------------------ Profile */
+
+.profile-image {
+    height: 90px;
+    width: 90px;
+    border-radius: 50%;
+}
+
+.edit-profile-btn {
+    position: absolute;
+    top: -12px;
+    right: -12px;
+}
+
+/* image select button */
+
+.select-image-btn {
+    background-color: #28a745;
+    color: white;
+    border: #28a745;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+    vertical-align: sub;
+}
+
+.select-image-btn:hover,
+.select-image-btn:active,
+.select-image-btn:focus {
+    background-color: #228f3b;
+
+    -webkit-box-shadow: 0 6px 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.5);
+}
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-file input[type="file"] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.custom-checkbox .custom-control-label::before {
+    border-color: #dc3545;
+}
+
+.custom-checkbox .custom-control-input:checked~.custom-control-label::before {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+
+/*------------------------------------Media */
+@media screen and (min-width: 768px) {
+    .event-img {
+        padding-top: 60%;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .event-card {
+        width: 31.33%;
+    }
+}
+
+
+@media screen and (min-width: 1024px) {
+    .event-card {
+        padding: 10px 15px;
+    }
 }

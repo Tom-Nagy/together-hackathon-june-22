@@ -4,47 +4,101 @@
 {% block extra_title %}- profile{% endblock %}
 
 {% block content %}
-<div class="container-fluid my-4">
-    <div class="row">
-        <div class="col">
-            <h2>{{ request.user.username }}'s profile</h2>
+    <div class="container-fluid my-4">
+        <div class="row">
+            <div class="col">
+                <h2 class="text-center mx-auto mb-5">{{ request.user.username }}'s profile</h2>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-4">
-            {% if user_profile.image %}
-                <a href="{{ user_profile.image.url }}" target="_blank" aria-label="Link to view the profile picture.">
-                    <img class="img-fluid" src="{{ user_profile.image.url }}" alt="profile picture">
-                </a>
-            {% else %}
-                <img class="img-fluid" src=" {{ MEDIA_URL }}default-image.png" alt="default profile picture">
-            {% endif %}
-            <form action="" method="" id="make-profile-public-form">
-                <div class="ml-4">
-                    <input class="form-check-input" type="checkbox" id="make-profile-public-chekbox" name="make-profile-public-chekbox">
-                    <label class="form-check-label" for="make-profile-public-chekbox">
-                        make profile public
-                    </label>
-                </div>
-            </form>
-        </div>
-        <div class="col-8">
-            <p>Username: {{ request.user.username}}</p>
-            <p>Email: {{ request.user.email}}</p>
-            <p>
-                About me:<br/>
-                {% if user_profile.about %}
-                    {{ user_profile.about }}
+        <div class="row">
+            <div class="col text-right mr-5">
+                <!-- Profile image -->
+                {% if user_profile.image %}
+                    <a href="{{ user_profile.image.url }}" target="_blank" aria-label="Link to view the profile picture.">
+                        <img class="img-fluid profile-image mr-4" src="{{ user_profile.image.url }}" alt="profile picture">
+                    </a>
                 {% else %}
-                    <span class="text-muted">Tell us who you are ...</span>
+                    <img class="img-fluid profile-image mr-4" src=" {{ MEDIA_URL }}default-image.png" alt="default profile picture">
                 {% endif %}
-            </p>
+                <!-- Make profile public form -->
+                <form action="" method="" id="make-profile-public-form">
+                    <div class="ml-4">
+                        <input class="form-check-input" type="checkbox" id="make-profile-public-chekbox" name="make-profile-public-chekbox">
+                        <label class="form-check-label" for="make-profile-public-chekbox">
+                            make profile public
+                        </label>
+                    </div>
+                </form>
+                <!-- Button trigger edit profile modal -->
+                <button type="button" class="btn edit-profile-btn" data-toggle="modal" data-target="#edit-profile-modal" title="Edit profile">
+                    <i class="fa-regular fa-pen-to-square"></i>
+                    <span class="sr-only">Edit your profile information</span>
+                </button>
+                <!-- Edit profile modal -->
+                <div class="modal fade" id="edit-profile-modal" data-backdrop="static" data-keyboard="false" tabindex="-1" 
+                aria-labelledby="edit-profile-modal-label" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="edit-profile-modal-label">Edit your profile</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <form action="{% url 'profile' %}" method="POST">
+                                <div class="modal-body text-left">
+                                    {% csrf_token %}
+                                    <input class="form-control mb-2" type="text" id="username" name="username" placeholder="Username" 
+                                    value="{{ request.user.username }}">
+                                    <input class="form-control mb-2" type="text" id="email" name="email" placeholder="Email" 
+                                    value="{{ request.user.email }}">
+                                    {% for field in profile_form %}
+                                        <!-- display field as crispy except for the custom widget for image  -->
+                                        {% if field.name != 'image' %}
+                                            {{ field | as_crispy_field }}
+                                        {% else %}
+                                            {{ field }}
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                    <button type="submit" class="btn btn-primary">Update profile</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Profile information -->
+            <div class="col pl-0">
+                <p class="mb-1"><span class="text-muted">Username: </span>{{ request.user.username}}</p>
+                <p class="mb-2"><span class="text-muted">Email: </span>{{ request.user.email}}</p>
+                <p>
+                    <span class="text-muted">About me:</span><br/>
+                    {% if user_profile.about %}
+                        {{ user_profile.about }}
+                    {% else %}
+                        <span class="ml-2">Tell us who you are ...</span>
+                    {% endif %}
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            {% include 'profiles/includes/favorites-large-screen.html' %}
+            {% include 'profiles/includes/favorites-small-screen.html' %}
         </div>
     </div>
-    <div class="row">
-        <div class="col-12">
-            <h3>Favorites</h3>
-        </div>
-    </div>
-</div>
+{% endblock %}
+
+{% block postloadjs %}
+    {{ block.super }}
+    <!-- update file name -->
+    <script>
+        /* jshint esversion: 8 */
+        $('#new-image').change(function() {
+            var file = $('#new-image')[0].files[0];
+            $('#filename').text(`Image will be set to: ${file.name}`);
+        });
+    </script>
 {% endblock %}
