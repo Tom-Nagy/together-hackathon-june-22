@@ -35,7 +35,7 @@
                     <span class="sr-only">Edit your profile information</span>
                 </button>
                 <!-- Edit profile modal -->
-                <div class="modal fade" id="edit-profile-modal" data-backdrop="static" data-keyboard="false" tabindex="-1" 
+                <div class="modal fade" id="edit-profile-modal" data-backdrop="static" data-keyboard="false" tabindex="-1"
                 aria-labelledby="edit-profile-modal-label" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
@@ -45,12 +45,12 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <form action="{% url 'profile' %}" method="POST">
+                            <form action="{% url 'profile' %}" method="POST" enctype="multipart/form-data">
                                 <div class="modal-body text-left">
                                     {% csrf_token %}
-                                    <input class="form-control mb-2" type="text" id="username" name="username" placeholder="Username" 
+                                    <input class="form-control mb-2" type="text" id="username" name="username" placeholder="Username"
                                     value="{{ request.user.username }}">
-                                    <input class="form-control mb-2" type="text" id="email" name="email" placeholder="Email" 
+                                    <input class="form-control mb-2" type="text" id="email" name="email" placeholder="Email"
                                     value="{{ request.user.email }}">
                                     {% for field in profile_form %}
                                         <!-- display field as crispy except for the custom widget for image  -->
