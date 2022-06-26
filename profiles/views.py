@@ -21,7 +21,7 @@ def profile(request):
             make_profile_public = request.POST['make_profile_public']
             user_profile.make_public = make_profile_public
             user_profile.save()
-            if make_profile_public is True:
+            if make_profile_public == 'True':
                 messages.success(request, 'Your profile is now public')
             else:
                 messages.success(request, 'Your profile is not public anymore')
