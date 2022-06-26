@@ -11,7 +11,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col text-right mr-5">
+            <div class="col text-right mr-md-5">
                 <!-- Profile image -->
                 {% if user_profile.image %}
                     <a href="{{ user_profile.image.url }}" target="_blank" aria-label="Link to view the profile picture.">
@@ -20,15 +20,47 @@
                 {% else %}
                     <img class="img-fluid profile-image mr-4" src=" {{ MEDIA_URL }}default-image.png" alt="default profile picture">
                 {% endif %}
-                <!-- Make profile public form -->
-                <form action="" method="" id="make-profile-public-form">
+                <!-- Make profile public trigger input -->
+                <form>
                     <div class="ml-4">
-                        <input class="form-check-input" type="checkbox" id="make-profile-public-chekbox" name="make-profile-public-chekbox">
+                        <input class="form-check-input" type="checkbox" id="make-profile-public-chekbox" name="make-profile-public-chekbox"
+                        data-toggle="modal" data-target="#make-profile-public-modal"
+                        {% if user_profile.make_public %} checked{% endif %}>
                         <label class="form-check-label" for="make-profile-public-chekbox">
                             make profile public
                         </label>
                     </div>
                 </form>
+                <!-- Make profile public confirmation modal -->
+                <div class="modal fade" id="make-profile-public-modal" data-backdrop="static" data-keyboard="false" tabindex="-1"
+                aria-labelledby="make-profile-public-modal-label" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="make-profile-public-modal-label">Make your profile public</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body text-left">
+                                <p>
+                                    Making your profile public will allow other user to see your profile information.<br/>
+                                    <br/>
+                                    Please confirm.
+                                </p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                <form action="{% url 'profile' %}" method="POST" id="confirm-make-public-form">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="make_profile_public" 
+                                    value="{% if user_profile.make_public == True %}False{% else %}True{% endif %}">
+                                    <button type="submit" class="btn btn-primary">Make public</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <!-- Button trigger edit profile modal -->
                 <button type="button" class="btn edit-profile-btn" data-toggle="modal" data-target="#edit-profile-modal" title="Edit profile">
                     <i class="fa-regular fa-pen-to-square"></i>
