@@ -372,8 +372,8 @@ event-title {
 
 .edit-profile-btn {
     position: absolute;
+    right: 0;
     top: -12px;
-    right: -12px;
 }
 
 /* image select button */
