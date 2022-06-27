@@ -57,3 +57,18 @@ def profile(request):
     }
 
     return render(request, template, context)
+
+
+@login_required
+def delete_profile(request):
+    ''' Delete the user profile and the user '''
+
+    # user_profile = get_object_or_404(UserProfile, user=request.user)
+    user = User.objects.get(username=request.user.username)
+
+    if request.method == 'POST':
+        # user_profile.delete()
+        user.delete()
+
+        messages.success(request, 'Your profile was deleted successfuly')
+        return redirect('home')

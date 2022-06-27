@@ -128,6 +128,11 @@ a:focus {
     color: #f2f2f2 !important;
 }
 
+.red {
+    /* Bootstrap danger color  */
+    color: #dc3545; 
+}
+
 /* background */
 
 /* for cancel button etc... */
@@ -423,6 +428,12 @@ event-title {
 
 
 /*------------------------------------Media */
+@media screen and (max-width: 375px) {
+    .profile-info {
+        font-size: 00.8rem;
+    }
+}
+
 @media screen and (min-width: 768px) {
     .event-img {
         padding-top: 60%;
