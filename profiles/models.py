@@ -15,8 +15,8 @@ class FavoritesChatrooms(models.Model):
         '''Set verbose name'''
         verbose_name_plural = 'Favorites Chatrooms'
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE,
-                                related_name='favorites_chatrooms')
+    user = models.ForeignKey(User, on_delete=models.CASCADE,
+                             related_name='favorites_chatrooms')
     chatroom = models.ForeignKey(Chatroom, on_delete=models.SET_NULL,
                                  null=True, blank=True,)
 
@@ -28,8 +28,8 @@ class FavoritesComments(models.Model):
         '''Set verbose name'''
         verbose_name_plural = 'Favorites Comments'
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE,
-                                related_name='favorites_comments')
+    user = models.ForeignKey(User, on_delete=models.CASCADE,
+                             related_name='favorites_comments')
     comment = models.ForeignKey(Comment, on_delete=models.SET_NULL,
                                 null=True, blank=True,)
 

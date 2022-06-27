@@ -15,7 +15,6 @@ class AdminComment(admin.ModelAdmin):
         'chatroom',
         'user',
         'date',
-
     )
 
 

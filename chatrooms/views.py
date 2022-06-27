@@ -2,9 +2,11 @@
 
 from django.shortcuts import (
     get_object_or_404, redirect, render)
+from django.contrib import messages
+
 from .models import Chatroom, Comment
 from .forms import AddChatroomForm, AddCommentForm
-from django.contrib import messages
+from profiles.models import FavoritesChatrooms, FavoritesComments
 
 
 def chatrooms(request):
@@ -12,6 +14,7 @@ def chatrooms(request):
     A view to display all the chatrooms and add a
     new chatroom.
     """
+
     chatrooms = Chatroom.objects.all()
     add_chatroom_form = AddChatroomForm()
 
@@ -29,13 +32,24 @@ def chatrooms(request):
             messages.error(request, 'Please login or register \
                                      to open a new chatroom!')
 
-    template = 'chatrooms/chatrooms.html'
-    context = {
-        'chatrooms': chatrooms,
-        'add_chatroom_form': add_chatroom_form,
-    }
+    if request.user.is_authenticated:
+        favorites_chatrooms = FavoritesChatrooms.objects.filter(
+            user=request.user)
 
-    return render(request, template, context)
+        template = 'chatrooms/chatrooms.html'
+        context = {
+            'favorites_chatrooms': favorites_chatrooms,
+            'chatrooms': chatrooms,
+            'add_chatroom_form': add_chatroom_form,
+        }
+        return render(request, template, context)
+    else:
+        template = 'chatrooms/chatrooms.html'
+        context = {
+            'chatrooms': chatrooms,
+            'add_chatroom_form': add_chatroom_form,
+        }
+        return render(request, template, context)
 
 
 def chatroom_detail(request, chatroom_id):
@@ -45,7 +59,8 @@ def chatroom_detail(request, chatroom_id):
     """
 
     chatroom = get_object_or_404(Chatroom, pk=chatroom_id)
-    comments = Comment.objects.filter(chatroom=chatroom).order_by('date').reverse()
+    comments = Comment.objects.filter(
+               chatroom=chatroom).order_by('date').reverse()
 
     if request.method == "POST":
         if request.user.is_authenticated:
@@ -61,12 +76,25 @@ def chatroom_detail(request, chatroom_id):
             messages.error(request, 'Please login or register \
                                      to ask a question!')
 
-    add_comment_form = AddCommentForm()
-    template = 'chatrooms/chatroom_detail.html'
-    context = {
-        'chatroom': chatroom,
-        'add_comment_form': add_comment_form,
-        'comments' : comments,
-        }
+    if request.user.is_authenticated:
+        favorites_comments = FavoritesComments.objects.filter(
+            user=request.user)
 
-    return render(request, template, context)
+        add_comment_form = AddCommentForm()
+        template = 'chatrooms/chatroom_detail.html'
+        context = {
+            'favorites_comments': favorites_comments,
+            'chatroom': chatroom,
+            'add_comment_form': add_comment_form,
+            'comments': comments,
+            }
+        return render(request, template, context)
+    else:
+        add_comment_form = AddCommentForm()
+        template = 'chatrooms/chatroom_detail.html'
+        context = {
+            'chatroom': chatroom,
+            'add_comment_form': add_comment_form,
+            'comments': comments,
+            }
+        return render(request, template, context)

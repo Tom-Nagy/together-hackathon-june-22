@@ -12,6 +12,8 @@
                 <button class="btn btn-success ml-1 ml-md-3 ml-lg-5" type="button" data-toggle="modal" data-target="#myModal">
                     Open a new chatroom <i class="fa-solid fa-plus pl-1"></i>
                 </button>
+                <!-- Just testing, will work on display soon ;) -->
+                {{ favorites_chatrooms }}
             {% else %}
                 <p class="text-center mx-auto py-3">
                     Please <a class="text-info" href="{% url 'account_login' %}" aria-label="Link to log in page.">Sign in</a> or

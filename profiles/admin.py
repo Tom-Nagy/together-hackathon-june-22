@@ -7,6 +7,7 @@ class AdminFavoritesChatrooms(admin.ModelAdmin):
         'user',
         'chatroom',
     )
+    ordering = ('user', 'chatroom',)
 
 
 class AdminFavoritesComments(admin.ModelAdmin):
@@ -14,6 +15,7 @@ class AdminFavoritesComments(admin.ModelAdmin):
         'user',
         'comment',
     )
+    ordering = ('user', 'comment',)
 
 
 class AdminUserProfile(admin.ModelAdmin):
