@@ -48,18 +48,30 @@
                             </div>
                             <div class="modal-body text-left">
                                 <p>
-                                    Making your profile public will allow other user to see your profile information.<br/>
+                                    {% if user_profile.make_public %}
+                                        Making your profile <strong>private</strong> will <strong>prevent</strong> 
+                                        other user to see your profile information.<br/>
+                                    {% else %}
+                                        Making your profile <strong>public</strong> will <strong>allow</strong> 
+                                        other user to see your profile information.<br/>
+                                    {% endif %}
                                     <br/>
                                     Please confirm.
                                 </p>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                                <form action="{% url 'profile' %}" method="POST" id="confirm-make-public-form">
+                                <form action="{% url 'edit_make_profile_public_status' %}" method="POST" id="confirm-make-public-form">
                                     {% csrf_token %}
                                     <input type="hidden" name="make_profile_public" 
                                     value="{% if user_profile.make_public == True %}False{% else %}True{% endif %}">
-                                    <button type="submit" class="btn btn-primary">Make public</button>
+                                    <button type="submit" class="btn btn-primary">
+                                        {% if user_profile.make_public %}
+                                            Make private
+                                        {% else %}
+                                            Make public
+                                        {% endif %}
+                                    </button>
                                 </form>
                             </div>
                         </div>
