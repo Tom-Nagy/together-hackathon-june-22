@@ -11,7 +11,7 @@
             </div>
         </div>
         <div class="row align-items-center position-relative">
-            <div class="col text-right mr-md-5">
+            <div class="col text-right mr-md-5 pr-0">
                 <!-- Profile image -->
                 {% if user_profile.image %}
                     <a href="{{ user_profile.image.url }}" target="_blank" aria-label="Link to view the profile picture.">
@@ -22,7 +22,7 @@
                 {% endif %}
                 <!-- Make profile public trigger input -->
                 <form>
-                    <div class="ml-md-4">
+                    <div>
                         <input class="form-check-input" type="checkbox" id="make-profile-public-chekbox" name="make-profile-public-chekbox"
                         data-toggle="modal" data-target="#make-profile-public-modal"
                         {% if user_profile.make_public %} checked{% endif %}>
@@ -67,9 +67,9 @@
                 </div>
             </div>
             <!-- Profile information -->
-            <div class="col pl-1 align-middle">
-                <p class="mb-1"><span class="text-muted small">Username: </span>{{ request.user.username}}</p>
-                <p class="mb-2"><span class="text-muted small">Email: </span>{{ request.user.email}}</p>
+            <div class="col pl-1 align-middle profile-info">
+                <p class="mb-1"><span class="text-muted small">Username: </span>{{ request.user.username }}</p>
+                <p class="mb-2"><span class="text-muted small">Email: </span>{{ request.user.email }}</p>
                 <p class="d-none d-md-block">
                     <span class="text-muted small">About me:</span><br/>
                     {% if user_profile.about %}
@@ -79,7 +79,7 @@
                     {% endif %}
                 </p>
             </div>
-            <div class="col-12 d-block d-md-none mt-3">
+            <div class="col-12 d-block d-md-none mt-3 profile-info">
                 <p>
                     <span class="text-muted small">About me:</span><br/>
                     {% if user_profile.about %}
@@ -89,12 +89,20 @@
                     {% endif %}
                 </p>
             </div>
-            <!-- Button trigger edit profile modal -->
-            <button type="button" class="btn edit-profile-btn mr-md-2" data-toggle="modal" data-target="#edit-profile-modal" title="Edit profile">
-                <i class="fa-regular fa-pen-to-square"></i>
-                <span class="sr-only">Edit your profile information</span>
-            </button>
-            <!-- Edit profile modal -->
+            <div class="edit-profile-btn mr-md-2">
+                <!-- Button trigger EDIT profile modal -->
+                <button type="button" class="btn profile-info" data-toggle="modal" data-target="#edit-profile-modal" title="Edit profile">
+                    <i class="fa-regular fa-pen-to-square"></i>
+                    <span class="sr-only">Edit your profile information</span>
+                </button>
+                <span>|</span>
+                <!-- Button trigger DELETE profile modal -->
+                <button type="button" class="btn red profile-info" data-toggle="modal" data-target="#delete-profile-modal" title="Delete profile">
+                    <i class="fa-regular fa-trash-can"></i>
+                    <span class="sr-only">Delete your profile</span>
+                </button>
+            </div>
+            <!-- EDIT profile modal -->
             <div class="modal fade" id="edit-profile-modal" data-backdrop="static" data-keyboard="false" tabindex="-1"
             aria-labelledby="edit-profile-modal-label" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
@@ -126,6 +134,32 @@
                                 <button type="submit" class="btn btn-primary">Update profile</button>
                             </div>
                         </form>
+                    </div>
+                </div>
+            </div>
+            <!-- DELETE profile modal -->
+            <div class="modal fade" id="delete-profile-modal" data-backdrop="static" data-keyboard="false" tabindex="-1"
+            aria-labelledby="delete-profile-modal-label" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title red" id="delete-profile-modal-label">Delete your profile</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            You are about to delete your profile.<br/>
+                            This action is irreversible ...<br/>
+                            Please confirm.
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                            <form action="{% url 'delete_profile' %}" method="POST">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-primary">Delete profile</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
